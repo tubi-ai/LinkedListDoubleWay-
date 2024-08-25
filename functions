@@ -1,0 +1,126 @@
+93% of storage used … If you run out, you can't create, edit, and upload files. Get 100 GB of storage for TRY 9.99 TRY 0 for 1 month.
+public class functions {
+    node head=this.head;
+    node tail=this.tail;
+
+    void addToHead(int x,String name){
+        node newHead = new node(x,name);
+
+        if (head == null){
+            head = newHead;
+            tail = newHead;
+            newHead.next = null;
+        } else{
+            newHead.next = head;
+            head.prev = newHead;
+            head = newHead;
+        }
+
+    }
+    void addToTail(int x,String name){
+        node newTail = new node(x,name);
+
+        if (head == null){
+            head = newTail;
+            tail = newTail;
+            newTail.next = null;
+        } else{
+            tail.next = newTail;
+            newTail.prev = tail;
+            tail = newTail;
+            newTail.next = null;
+        }
+
+    }
+    void addInBetween(int x,String name, int indis){
+        node element = new node(x,name);
+
+        if (head == null && indis == 0){
+            head = element;
+            tail = element;
+            element.next = null;
+        } else  if (head != null && indis == 0) {
+            element.next = head;
+            head.prev = element;
+            head = element;
+        } else{
+            int n = 0;
+            node temp = head;
+            node temp2 = head;
+            while (temp!=null){
+                temp=temp.next;
+                n++;
+            } temp = head;
+            if (indis > n){
+                tail.next = element;
+                element.prev = tail;
+                tail = element;
+            } else {
+                int i=0;
+                while (i!=indis){
+                    temp = temp.next;
+                    i++;
+                }
+                temp.prev.next = element;
+                temp.prev = element;
+                element.next = temp;
+            }
+        }
+
+    }
+    void removeToHead(){
+        if(head==null)
+            System.out.println("there is nothing to remove");
+        else if (head.next==null){
+            head=null;
+            tail=null;
+        } else{
+            head = head.next;
+            head.prev = null;
+        }
+    }
+    void removeToTail(){
+        if(head==null)
+            System.out.println("there is nothing to remove");
+        else if (head.next==null){
+            head=null;
+            tail=null;
+        } else {
+            tail = tail.prev;
+            tail.next = null;
+        }
+    }
+    void removeInBetween(int indis){
+        if(head==null)
+            System.out.println("there is nothing to remove");
+        else if (head.next==null){
+            head=null;
+            tail=null;
+        } else if (head != null && indis <= 0){
+            head = head.next;
+            head.prev = null;
+        } else {
+            int i=0;
+            node temp = head;
+            while (temp!=null){
+                i++;
+                temp = temp.next;
+            }
+            if (i==indis){
+                tail = tail.prev;
+                tail.next = null;
+            } else {
+                temp = head;
+                int j=0;
+                while (j<indis){
+                    j++;
+                    temp = temp.next;
+                }
+                temp.next.prev = temp.prev;
+                temp.prev.next = temp.next;
+
+            }
+        }
+
+    }
+}
